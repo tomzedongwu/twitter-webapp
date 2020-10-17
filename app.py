@@ -5,8 +5,8 @@
 
 import dash
 import dash_core_components as dcc
+import dash_bootstrap_components as dbc
 import dash_html_components as html
-import plotly.express as px
 import pandas as pd
 from datetime import date
 from dash.dependencies import Input, Output, State, MATCH, ALL
@@ -15,12 +15,12 @@ from dash.dependencies import Input, Output, State, MATCH, ALL
 app = dash.Dash(__name__)
 
 
-def make_card(text1, text2):
+def make_card(text1, text2, url):
 	div = html.Div([
 		html.Div([
 			html.Div([
 				html.H5(text1),
-				html.P(text2)
+				html.Img(src = url)
 			], className="card_front"),
 			html.Div([
 				html.H5(text1),
@@ -38,73 +38,60 @@ app.layout = html.Div([
 					  className="intro"),
 
 	html.Div([
-		html.Div([
-			html.P("Click To Add Cards  "),
-			html.Button('Add Cards', id='add_cards', n_clicks=0,
-			className="btn")
-		], className="filter1"),
-
-		html.Div([
-			html.P("Click To Select Date  "),
-			dcc.DatePickerSingle(
-				id='date-picker-single',
-				date=date(2020, 1, 1)
-			)
-		], className="filter1"),
-
-		html.Div([
-			html.P("Click To Select Cities  "),
-			dcc.Dropdown(
-				options=[
-					{'label': 'New York City', 'value': 'NYC'},
-					{'label': 'Seattle', 'value': 'SEA'},
-					{'label': 'San Francisco', 'value': 'SF'},
-					{'label': 'Chicago', 'value': 'CHI'},
-					{'label': 'Los Angeles', 'value': 'LA'}
-				],
-				multi=True,
-				value="SEA"
-			)  
-		], className="filter2"),
-
-		html.Div([
-			html.P("Range Slider For .....  "),
-			dcc.Slider(
-				min=0,
-				max=5,
-				marks={i: 'Label {}'.format(i) for i in range(5)},
-				value=5,
-			)   
-		], className="filter3")
+		html.Div(
+			[dcc.Input(
+				id="terms",
+				type="text",
+				placeholder="Terms",
+				className = "tools",
+				style={'fontSize': '100%'}
+        	),
+			html.Button("Search")]
+		),
+		html.Div(
+			[dcc.Input(
+				id="hashtags",
+				type="text",
+				placeholder="Hashtags",
+				className = "tools",
+				style={'fontSize': '100%'}
+			),
+			html.Button("Search")]
+		),
+		html.Div(
+			[dcc.Input(
+				id="accounts",
+				type="text",
+				placeholder="Accounts",
+				className = "tools",
+				style={'fontSize': '100%'}
+			),
+			html.Button("Search")]
+		),
+		html.Div([dcc.DatePickerSingle(
+			id='my-date-picker-single',
+			min_date_allowed=date(2006, 3, 31),
+			date=date(2020, 10, 17)
+    	)])
 	], className="filters", id="filter"),
 
 	html.Div([
-		html.Div([make_card("Some Info", str(i) + "Some Info") \
+		html.Div([make_card("Some Info", str(i) + "Some Info", 
+		"") \
 				  for i in range(3)], 
 		className="row"),
 
-		html.Div([make_card("Some Info", str(i) + "Some Info") \
+		html.Div([make_card("Some Info", str(i) + "Some Info",
+		"") \
 				  for i in range(3)], 
 		className="row"),
 		
-		html.Div([make_card("Some Info", str(i) + "Some Info") \
+		html.Div([make_card("Some Info", str(i) + "Some Info",
+		"") \
 				  for i in range(3)], 
 		className="row")
 	], className="container", id="container")
 ])
-
-@app.callback(
-	Output('container', 'children'),
-	[Input('add_cards', 'n_clicks')],
-	[State('container', 'children')]
-)
-
-def more_cards(n_clicks, div_children):
-    if n_clicks > 0:
-    	new_card = html.Div([make_card("Some Info", str(i) + "Some Info") for i in range(3)], 
-		className="row")
-    	div_children.append(new_card)
-    return div_children
 
 if __name__ == '__main__':
     app.run_server(debug=True)

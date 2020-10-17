@@ -25,7 +25,7 @@ html{
 }
 .filters{
     width: 100%;
-    height: 100px;
+    height: 47px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -36,20 +36,26 @@ html{
     background-color:#85754d;
     z-index: 5;
 } 
-.filters > div{
-    display: block;
-    width: 30%;
+.filters>div{
+    width: 25%;
     height: 100%;
-    z-index: 5;
+    padding-left: 6%;
+    padding-right: 6%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.tools{ 
+    width: 150%;  
+    height: 90%;
+    border: 2px solid white;
+    border-radius: 10px;
+    vertical-align: middle;
+    margin-right: 20%;
 }
 button{
-    width: 40%;
-    height: 30%;
-}
-.filters > div > p{
-    font-family: "Georgia";
-    font-style: italic;
-    color: #f1f1f1;
+    border: 1px solid white;
+    border-radius: 50px;
 }
 .sticky {
     position: fixed;
@@ -63,17 +69,15 @@ button{
 .row{
     width: 100%;
     height: 20%;
-    border: 1px solid rgb(0, 0, 0);
-    border-radius: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
     margin-top: 10px;
-}
+} 
 .flip_card {
     background-color: transparent;
     width: 100%;
-    height: 200px;
+    height: 250px;
     border: 3px solid #85754d;
     perspective: 1000px;
     border-radius: 10px;
@@ -103,6 +107,11 @@ button{
   .card_front {
     background-color: #4b2e83;
     color: white;
+    text-align: left;
+  }
+  .card_front > img{
+      width: 70%;
+      height: 75%;
   }
   .card_back {
     background-color: #4f3387;

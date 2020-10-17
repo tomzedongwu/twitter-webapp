@@ -2,6 +2,7 @@
 keys_and_secrets/
 venv/
 .vscode/
+result.json
 # experimentation file
 ta.py 
 

@@ -1,4 +1,5 @@
 pandas
+plotly
 dash
 dash_core_components
 dash_html_components
@@ -6,4 +7,3 @@ dash_bootstrap_components
 requests
 requests_oauthlib
 python-twitter
-plotly

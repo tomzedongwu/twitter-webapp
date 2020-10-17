@@ -1,3 +1,10 @@
+# project specific
+keys_and_secrets/
+venv/
+.vscode/
+# experimentation file
+ta.py 
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

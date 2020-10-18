@@ -50,12 +50,17 @@ app.layout = html.Div([
 	
 	], className="filters", id="filter"),
 
-	html.Div([], className="container", id="container")
+	html.Div([
+		html.Div([], className="column", id="col1"),
+		html.Div([], className="column", id="col2"),
+		html.Div([], className="column", id="col3"),
+	], id="container")
 ])
 
-
 @app.callback(
-	[Output('container', 'children')],
+	[Output("col1", "children"),
+	Output("col2", "children"),
+	 Output("col3", "children")],
 	[Input('search_button', 'n_clicks')],
 	[State("terms", "value"),
 	 State("hashtags", "value"),
@@ -63,16 +68,17 @@ app.layout = html.Div([
 )
 def refresh_content(button_clicks, terms, hashtags, accounts):
 	if terms is None and hashtags is None and accounts is None:
-		return ([html.P("you've found the flag: flag{twitter_webapp}")])
+		return html.P("you've found the flag: flag{twitter_webapp}"), html.P("you've found the flag: flag{twitter_webapp}"),html.P("you've found the flag: flag{twitter_webapp}")
 	terms = '' if terms is None else terms
 	hashtags = '' if hashtags is None else hashtags
 	accounts = '' if accounts is None else accounts
 	cards = reference.get_tweet_cards(terms, hashtags, accounts)
-	res = [html.Div([cards[i + j] if i + j < len(cards) else html.Div() for j in range(0, len(cards), 3)]) for i in range(3)]
-	print(len(cards))
-
-	return [res]
-
+	num_column = 3
+	res = [html.Div([cards[i + j] if i + j < len(cards) else html.Div() for j in range(0, len(cards), num_column)], className="column") for i in range(num_column)]
+	#temp = [cards[i + j] if i + j < len(cards) else html.Div() for j in range(0, len(cards), num_column)]
+	#print(len(cards))
+	
+	return res[0], res[1], res[2]
 
 if __name__ == '__main__':
     app.run_server(debug=True)

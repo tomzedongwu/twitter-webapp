@@ -48,7 +48,7 @@ def make_card(status):
 def make_card_header(profile_img_url, name, description):
     return html.Div([
             html.Div([
-                html.Img(src=profile_image_url, style={"borderRadius":"10px", "height":"50px", "width":"50px"}),
+                html.Img(src=profile_img_url, style={"borderRadius":"10px", "height":"50px", "width":"50px"}),
                 html.H3(name)
             ], className="name_des"),
             html.P(description, style={"fontStyle":"italic", "fontSize":"12px"})

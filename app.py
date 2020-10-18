@@ -13,7 +13,7 @@ from dash.dependencies import Input, Output, State, MATCH, ALL
 import reference
 
 app = dash.Dash(__name__)
-
+app.title = "Twitter-WebApp"
 
 app.layout = html.Div([
 	html.Div([
@@ -21,9 +21,8 @@ app.layout = html.Div([
     	html.H2('Twitter Sentiment Dashboard', className="header"),
 		html.Img(src="assets/images/icon2.png", className="uw"),
 	], className="banner"),
-	html.Div([html.P('This is an interactive web app designated for \
-					  filtering tweets to see sentiments')],
-					  className="intro"),
+	html.Div([html.P('An interactive web app to search for and filter Tweets and gain insight into users\' sentiments')],
+            className="intro"),
 
 	html.Div([
 		html.Div([
@@ -50,16 +49,16 @@ app.layout = html.Div([
 				className = "tools",
 				style={'fontSize': '100%'}
 		)]),
-		html.Button("Search", id="search_button")
+		html.Button("Search", id="search_button", className="search")
 	
 	], className="filters", id="filter"),
-
 	html.Div([
 		html.Div([], className="column", id="col1"),
 		html.Div([], className="column", id="col2"),
 		html.Div([], className="column", id="col3"),
 		html.Div([], className="column", id="col4")
-	], id="container")
+	], id="container", className="container"),
+	html.Img(src="assets/images/dog.jpg", className="instruct")
 ])
 
 @app.callback(
@@ -74,7 +73,7 @@ app.layout = html.Div([
 )
 def refresh_content(button_clicks, terms, hashtags, accounts):
 	if terms is None and hashtags is None and accounts is None:
-		return html.P("you've found the flag: flag{twitter_webapp}"), html.P(""),html.P(""),html.P("")
+		return html.P(""), html.P(""),html.P(""),html.P("")
 	terms = '' if terms is None else terms
 	hashtags = '' if hashtags is None else hashtags
 	accounts = '' if accounts is None else accounts

@@ -9,11 +9,11 @@ import re
 
 def get_tweet_cards(terms, hashtags, accounts):
     result = search(terms, hashtags, accounts)
-    cards = make_cards(result)
-    return cards
+    dictionary = make_sentiment_dictionary()
+    return [make_card(tweet, dictionairy) for tweet in result]
 
 
-def make_card(status):
+def make_card(status, dictionary):
     created_at = if_has_key(status, "created_at")
     full_text = if_has_key(status, "full_text")
     user = if_has_key(status, "user")
@@ -37,7 +37,8 @@ def make_card(status):
     profile_image_url = if_has_key(user, "profile_image_url")
     name = if_has_key(user, "name")
     description = if_has_key(user, "description")
-    header = make_card_header(profile_image_url, name, description)
+    sentiment = get_total_sentiment(full_text)
+    header = make_card_header(profile_image_url, name, description, sentiment)
     card = make_inner_card(full_text, media, url)
     account = if_has_key(user, "screen_name")
     if account is not None:
@@ -56,7 +57,8 @@ def make_card_header(profile_img_url, name, description):
                 html.Img(src=profile_img_url, style={"borderRadius":"10px", "height":"50px", "width":"50px"}),
                 html.H3(name)
             ], className="name_des"),
-            html.P(description, style={"fontStyle":"italic", "fontSize":"12px"})
+            html.P(description, style={"fontStyle":"italic", "fontSize":"12px"}),
+            html.P("Total Tweet Sentiment: " + str(sentiment), "fontSize":"14px")
         ], className = "card_header")
 
 def make_inner_card(full_text, media, url):
@@ -78,8 +80,20 @@ def if_has_key(status, key):
     return None
 
 
-def make_cards(tweets):
-    return [make_card(tweet) for tweet in tweets]
+def make_sentiment_dictionary():
+    as_df = pd.read_csv('vader_lexicon.txt', sep='\t', names=['word', 'sentiment', 'std', 'raw_values'])
+    as_df = as_df[['word', 'sentiment']]
+    as_records = as_df.to_dict(orient="records")
+    return {item['word']:item['sentiment'] for item in as_dict}
+    
+
+def get_total_sentiment(dictionary, query):
+    count = 0
+    re.sub("[^A-Za-z]"," ",query)
+    for word in query.split(' '):
+        if word in dictionary:
+            count += dictionary[word]
+    return count
 
 
 def search(terms, hashtags, accounts):

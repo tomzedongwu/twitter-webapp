@@ -1,9 +1,11 @@
-window.onload = function() {
-    let oBtn = document.querySelector(".search");
-    let oImg = document.querySelector(".husky");
-    oBtn.onclick = function() {
-        oImg.style.width = "0px";
-        oImg.style.height = "0px"
+window.onscroll = function() {
+    var tools = document.querySelector(".filters");
+    var sticky = tools.offsetTop;
+
+    if (window.pageYOffset >= sticky) {
+        tools.classList.add("sticky")
+    } else {
+        tools.classList.remove("sticky");
     }
 }
 

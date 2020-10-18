@@ -7,3 +7,4 @@ dash_bootstrap_components
 requests
 requests_oauthlib
 python-twitter
+gunicorn

@@ -1,4 +1,6 @@
 import twitter
+import os
+import json
 import dash
 import dash_core_components as dcc
 import dash_bootstrap_components as dbc
@@ -12,7 +14,7 @@ def get_tweet_cards(terms, hashtags, accounts):
 
 
 def make_card(status):
-    status = status.AsDict()
+    # status = status.AsDict()
     full_text = if_has_key(status, "full_text")
     user = if_has_key(status, "user")
     full_text = if_has_key(status, "full_text")
@@ -64,7 +66,7 @@ def make_cards(tweets):
 
 
 def search(terms, hashtags, accounts):
-    api = authenticateApi()
+    print("called search with " + terms)
     hashtags = hashtags.split(' ')
     accounts = accounts.split(' ')
     hashtags = [] if hashtags[0] == '' else hashtags
@@ -80,11 +82,41 @@ def search(terms, hashtags, accounts):
     hash_str = ' '.join(hashtags)
     acct_str = ' '.join(accounts)
     query = (terms + ' ' + hash_str + ' ' + acct_str).strip()
-    print(query)
+    repeat = get_result_if_repeat(query)
+    if repeat is not None:
+        return repeat
+    api = authenticateApi()
+    print("===================\ncalling twitter api\n====================")
     results = api.GetSearch(term=query, count=100, lang='en',
                             result_type='mixed')
+    results = [result.AsDict() for result in results]
+    if repeat is None:
+        write_out(query, results)
     return results
 
+
+def write_out(query, results):
+    with open("prev_query.txt", "w+") as f:
+        f.write(query)
+    with open("prev_query_res.txt", "w+") as f:
+        json.dump(results, f)
+
+
+def get_result_if_repeat(query):
+    if not os.path.exists('prev_query.txt') or \
+        not os.path.exists('prev_query_res.txt'):
+        return None
+    with open('prev_query.txt') as f:
+        old_query = f.readline().rstrip()
+        if old_query != query:
+            return None
+    with open('prev_query_res.txt') as f:
+        res = json.loads(''.join(f.readlines()))
+        if isinstance(res, list):
+            return res
+        else:
+            print(res)
+    return None
 
 def authenticateApi():
     """

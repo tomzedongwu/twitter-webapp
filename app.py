@@ -68,7 +68,7 @@ def refresh_content(button_clicks, terms, hashtags, accounts):
 	hashtags = '' if hashtags is None else hashtags
 	accounts = '' if accounts is None else accounts
 	cards = reference.get_tweet_cards(terms, hashtags, accounts)
-	res = [html.Div([cards[i + j] for j in range(0, len(cards) - 1, 3)]) for i in range(3)]
+	res = [html.Div([cards[i + j] if i + j < len(cards) else html.Div() for j in range(0, len(cards), 3)]) for i in range(3)]
 	print(len(cards))
 
 	return [res]

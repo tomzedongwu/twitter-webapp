@@ -65,8 +65,22 @@ def make_cards(tweets):
 
 def search(terms, hashtags, accounts):
     api = authenticateApi()
-    query = (terms + " " + hashtags).strip()
-    print("calling twitter api")
+    hashtags = hashtags.split(' ')
+    accounts = accounts.split(' ')
+    hashtags = [] if hashtags[0] == '' else hashtags
+    accounts = [] if accounts[0] == '' else accounts
+    for i in range(len(hashtags)):
+        hashtag = hashtags[i]
+        if hashtag[0] != '#':
+            hashtags[i] = '#' + hashtag
+    for i in range(len(accounts)):
+        account = accounts[i]
+        if account[0] != '@':
+            accounts[i] = '@' + account
+    hash_str = ' '.join(hashtags)
+    acct_str = ' '.join(accounts)
+    query = (terms + ' ' + hash_str + ' ' + acct_str).strip()
+    print(query)
     results = api.GetSearch(term=query, count=100, lang='en',
                             result_type='mixed')
     return results

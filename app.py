@@ -13,7 +13,7 @@ from dash.dependencies import Input, Output, State, MATCH, ALL
 import reference
 
 app = dash.Dash(__name__)
-
+app.title = "Twitter-WebApp"
 
 app.layout = html.Div([
 	html.Div([
@@ -52,13 +52,13 @@ app.layout = html.Div([
 		html.Button("Search", id="search_button", className="search")
 	
 	], className="filters", id="filter"),
-	html.Img(src="assets/images/husky.jpg"),
 	html.Div([
 		html.Div([], className="column", id="col1"),
 		html.Div([], className="column", id="col2"),
 		html.Div([], className="column", id="col3"),
 		html.Div([], className="column", id="col4")
-	], id="container", className="container")
+	], id="container", className="container"),
+	html.Img(src="assets/images/dog.jpg", className="instruct")
 ])
 
 @app.callback(

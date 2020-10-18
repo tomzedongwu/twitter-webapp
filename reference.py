@@ -6,11 +6,12 @@ import dash_core_components as dcc
 import dash_bootstrap_components as dbc
 import dash_html_components as html
 import re
+import pandas as pd
 
 def get_tweet_cards(terms, hashtags, accounts):
     result = search(terms, hashtags, accounts)
     dictionary = make_sentiment_dictionary()
-    return [make_card(tweet, dictionairy) for tweet in result]
+    return [make_card(tweet, dictionary) for tweet in result]
 
 
 def make_card(status, dictionary):
@@ -37,7 +38,7 @@ def make_card(status, dictionary):
     profile_image_url = if_has_key(user, "profile_image_url")
     name = if_has_key(user, "name")
     description = if_has_key(user, "description")
-    sentiment = get_total_sentiment(full_text)
+    sentiment = get_total_sentiment(dictionary, full_text)
     header = make_card_header(profile_image_url, name, description, sentiment)
     card = make_inner_card(full_text, media, url)
     account = if_has_key(user, "screen_name")
@@ -51,14 +52,14 @@ def make_card(status, dictionary):
     return result
 
 
-def make_card_header(profile_img_url, name, description):
+def make_card_header(profile_img_url, name, description, sentiment):
     return html.Div([
             html.Div([
                 html.Img(src=profile_img_url, style={"borderRadius":"10px", "height":"50px", "width":"50px"}),
                 html.H3(name)
             ], className="name_des"),
             html.P(description, style={"fontStyle":"italic", "fontSize":"12px"}),
-            html.P("Total Tweet Sentiment: " + str(sentiment), "fontSize":"14px")
+            html.P("Total Tweet Sentiment: " + str(sentiment), style={"fontSize":"14px"})
         ], className = "card_header")
 
 def make_inner_card(full_text, media, url):
@@ -84,7 +85,7 @@ def make_sentiment_dictionary():
     as_df = pd.read_csv('vader_lexicon.txt', sep='\t', names=['word', 'sentiment', 'std', 'raw_values'])
     as_df = as_df[['word', 'sentiment']]
     as_records = as_df.to_dict(orient="records")
-    return {item['word']:item['sentiment'] for item in as_dict}
+    return {item['word']:item['sentiment'] for item in as_records}
     
 
 def get_total_sentiment(dictionary, query):

@@ -14,6 +14,7 @@ def get_tweet_cards(terms, hashtags, accounts):
 
 
 def make_card(status):
+    created_at = if_has_key(status, "created_at")
     full_text = if_has_key(status, "full_text")
     user = if_has_key(status, "user")
     full_text = if_has_key(status, "full_text")

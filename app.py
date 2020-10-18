@@ -53,7 +53,7 @@ app.layout = html.Div([
 		html.Button("Search", id="search_button", className="search")
 	
 	], className="filters", id="filter"),
-
+	html.Img(src="assets/images/husky.jpg"),
 	html.Div([
 		html.Div([], className="column", id="col1"),
 		html.Div([], className="column", id="col2"),

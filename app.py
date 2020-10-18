@@ -16,7 +16,7 @@ app = dash.Dash(__name__)
 
 
 app.layout = html.Div([
-    html.H2('Twitter-Like App for Filtering Sentiment', className="header"),
+    html.H2('Twitter Sentiment Dashboard', className="header"),
 	html.Div([html.P('This is an interactive web app designated for \
 					  filtering tweets to see sentiments')],
 					  className="intro"),
@@ -54,13 +54,15 @@ app.layout = html.Div([
 		html.Div([], className="column", id="col1"),
 		html.Div([], className="column", id="col2"),
 		html.Div([], className="column", id="col3"),
+		html.Div([], className="column", id="col4")
 	], id="container")
 ])
 
 @app.callback(
 	[Output("col1", "children"),
 	Output("col2", "children"),
-	 Output("col3", "children")],
+	 Output("col3", "children"),
+	 Output("col4", "children")],
 	[Input('search_button', 'n_clicks')],
 	[State("terms", "value"),
 	 State("hashtags", "value"),
@@ -68,17 +70,17 @@ app.layout = html.Div([
 )
 def refresh_content(button_clicks, terms, hashtags, accounts):
 	if terms is None and hashtags is None and accounts is None:
-		return html.P("you've found the flag: flag{twitter_webapp}"), html.P("you've found the flag: flag{twitter_webapp}"),html.P("you've found the flag: flag{twitter_webapp}")
+		return html.P("you've found the flag: flag{twitter_webapp}"), html.P(""),html.P(""),html.P("")
 	terms = '' if terms is None else terms
 	hashtags = '' if hashtags is None else hashtags
 	accounts = '' if accounts is None else accounts
 	cards = reference.get_tweet_cards(terms, hashtags, accounts)
-	num_column = 3
+	num_column = 4
 	res = [html.Div([cards[i + j] if i + j < len(cards) else html.Div() for j in range(0, len(cards), num_column)], className="column") for i in range(num_column)]
 	#temp = [cards[i + j] if i + j < len(cards) else html.Div() for j in range(0, len(cards), num_column)]
 	#print(len(cards))
 	
-	return res[0], res[1], res[2]
+	return res[0], res[1], res[2], res[3]
 
 if __name__ == '__main__':
     app.run_server(debug=True)

@@ -59,7 +59,7 @@ def make_card_header(profile_img_url, name, description, sentiment):
                 html.H3(name)
             ], className="name_des"),
             html.P(description, style={"fontStyle":"italic", "fontSize":"12px"}),
-            html.P("Total Tweet Sentiment: " + str(sentiment), style={"fontSize":"14px"})
+            html.P("Total Tweet Sentiment: " + '{:.1f}'.format(sentiment), style={"fontSize":"14px"})
         ], className = "card_header")
 
 def make_inner_card(full_text, media, url):

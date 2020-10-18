@@ -30,14 +30,14 @@ app.layout = html.Div([
 				id="terms",
 				type="text",
 				placeholder="Terms",
-				className = "tools",
+				className="tools",
 				style={'fontSize': '100%'}
         )]),
 		html.Div(
 			[dcc.Input(
 				id="hashtags",
 				type="text",
-				placeholder="Hashtags",
+				placeholder="#Hashtags",
 				className = "tools",
 				style={'fontSize': '100%'}
 		)]),
@@ -45,7 +45,7 @@ app.layout = html.Div([
 			[dcc.Input(
 				id="accounts",
 				type="text",
-				placeholder="Accounts",
+				placeholder="@Accounts",
 				className = "tools",
 				style={'fontSize': '100%'}
 		)]),
@@ -58,7 +58,7 @@ app.layout = html.Div([
 		html.Div([], className="column", id="col3"),
 		html.Div([], className="column", id="col4")
 	], id="container", className="container"),
-	html.Img(src="assets/images/dog.jpg", className="instruct")
+	html.Img(src="assets/images/dog2.jpg", className="instruct")
 ])
 
 @app.callback(

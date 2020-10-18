@@ -31,13 +31,13 @@ html{
     align-items: center;
     margin-top: 10px;
     margin-bottom: 20px;
-    border: 1px solid #85754d;
+    border: 4px solid #676767;
     border-radius: 12px;
     background-color:#85754d;
     z-index: 5;
 } 
 .filters>div{
-    width: 25%;
+    width: 40%;
     height: 100%;
     padding-left: 6%;
     padding-right: 6%;
@@ -45,8 +45,12 @@ html{
     justify-content: center;
     align-items: center;
 }
+.search_tool{
+    width: 100%;
+    height: 100%;
+}
 .tools{ 
-    width: 150%;  
+    width: 100%;  
     height: 90%;
     border: 2px solid white;
     border-radius: 10px;
@@ -66,55 +70,33 @@ button{
 .sticky + .container {
     padding-top: 60px;
 }
+.container{
+    width: 100%;
+    height: 100%;
+}
 .row{
     width: 100%;
-    height: 20%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 10px;
-} 
-.flip_card {
-    background-color: transparent;
-    width: 100%;
-    height: 250px;
-    border: 3px solid #85754d;
-    perspective: 1000px;
+    height: 100%;
+}
+.card{
+    width: 20%;
+    background-color: white;
     border-radius: 10px;
-    margin-left: 1.5%;
-    margin-right: 1.5%;
-  }
-  .flip_card_inner {
-    position: relative;
+    margin-top: 20px;
+    float: left;
+    margin-left: 4%;
+}
+.name_des{
+    width: 100%;
+    height: 5%;
+}
+.inner_card{
+    width: 95%;
+    height: 80%;
+    float: left;
+    border: 4px solid rgb(29,161,242);
+}
+.card_img{
     width: 100%;
     height: 100%;
-    text-align: center;
-    transition: transform 0.8s;
-    transform-style: preserve-3d;
-  }
-  .flip_card:hover .flip_card_inner {
-    transform: rotateY(180deg);
-  }
-  .card_front, .card_back {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-    border: 1px solid  #85754d;
-    border-radius: 10px;
-  }
-  .card_front {
-    background-color: #4b2e83;
-    color: white;
-    text-align: left;
-  }
-  .card_front > img{
-      width: 70%;
-      height: 75%;
-  }
-  .card_back {
-    background-color: #4f3387;
-    color: white;
-    transform: rotateY(180deg);
-  }
+}

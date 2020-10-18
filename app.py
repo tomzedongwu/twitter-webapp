@@ -30,7 +30,7 @@ app.layout = html.Div([
 				className = "tools",
 				style={'fontSize': '100%'}
         	),
-			html.Button("Search")]
+			html.Button("Search", )], className="search_tool"
 		),
 		html.Div(
 			[dcc.Input(
@@ -40,7 +40,7 @@ app.layout = html.Div([
 				className = "tools",
 				style={'fontSize': '100%'}
 			),
-			html.Button("Search")]
+			html.Button("Search")], className="search_tool"
 		),
 		html.Div(
 			[dcc.Input(
@@ -50,7 +50,7 @@ app.layout = html.Div([
 				className = "tools",
 				style={'fontSize': '100%'}
 			),
-			html.Button("Search")]
+			html.Button("Search")], className="search_tool"
 		),
 		html.Div([dcc.DatePickerSingle(
 			id='my-date-picker-single',
@@ -62,12 +62,6 @@ app.layout = html.Div([
 	html.Div([
 		html.Div(reference.main(), 
 		className="row"),
-
-		html.Div([], 
-		className="row"),
-		
-		html.Div([], 
-		className="row")
 	], className="container", id="container")
 ])
 

@@ -28,6 +28,10 @@ html{
     float: right;
 }
 
+.banner > img {
+    padding: 20px;
+}
+
 a {
     color: black;
     text-decoration: none;
@@ -79,13 +83,13 @@ a {
 }
 .tools{ 
     width: 100%;  
-    height: 90%;
-    border: 2px solid white;
-    border-radius: 10px;
+    height: 100%;
     vertical-align: middle;
-    margin-left: 20%;
     font-size: 18px;
     font-family: "Georgia";
+    background: #f1f1f1;
+    border: 0px;
+    border-radius: 5px;
 }
 button{
     width: 20%;
@@ -93,11 +97,13 @@ button{
     font-family: "Gerogia";
     font-style: italic;
     font-size: 20px;
-    border: 1px solid white;
+    background: #f1f1f1;
+    border: 2px solid #f1f1f1;
     border-radius: 50px;
-    margin-right: 10%;
+    margin-right: 1%;
 }
-button:hover{
+
+button:hover {
     background: rgb(2,0,36);
     background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(51,25,66,1) 100%);
     color: #f1f1f1;

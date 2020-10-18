@@ -1,4 +1,5 @@
 # project specific
+keys_and_secrets/
 venv/
 .vscode/
 # experimentation file

@@ -21,9 +21,8 @@ app.layout = html.Div([
     	html.H2('Twitter Sentiment Dashboard', className="header"),
 		html.Img(src="assets/images/icon2.png", className="uw"),
 	], className="banner"),
-	html.Div([html.P('This is an interactive web app designated for \
-					  filtering tweets to see sentiments')],
-					  className="intro"),
+	html.Div([html.P('An interactive web app to search for and filter Tweets and gain insight into users\' sentiments')],
+            className="intro"),
 
 	html.Div([
 		html.Div([

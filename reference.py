@@ -4,15 +4,17 @@ import dash_core_components as dcc
 import dash_bootstrap_components as dbc
 import dash_html_components as html
 
-def temp():
-    result = search('Half of this from 2015 came from W2S', '')
-    card = make_cards(result)
+
+def main():
+    result = search('Donald Trump', '')
+    cards = make_cards(result)
     #print(len(result))
-    return card
+    return cards
+
 
 def make_card(status):
-    status=status.AsDict()
-
+    status = status.AsDict()
+    full_text = if_has_key(status, "full_text")
     user = if_has_key(status, "user")
     full_text = if_has_key(status, "full_text")
     hashtags = if_has_key(status, "hashtags")
@@ -36,7 +38,7 @@ def make_card(status):
     result = html.Div([
         header,
         card
-    ], className=card)
+    ], className="card")
     return result
 
 def make_inner_card(full_text, media, url=None):
@@ -50,37 +52,29 @@ def make_inner_card(full_text, media, url=None):
         card.children.append(dbc.CardImg(src=media[0]["media_url"]))
     return card
 
+
+
 def if_has_key(status, key):
     if key in status:
         return status[key]
     return None
 
+
 def make_cards(tweets):
     print(len(tweets))
     return [make_card(tweet) for tweet in tweets]
 
+
 def search(words, hashtags):
-    url = 'q='
-
-    words_str = ''
-    words = words.split(' ')
-    words_str = '%20'.join(words)
-
-    hashtags = hashtags.split(' ')
-    hash_query_str = ''
-    if hashtags[0] != '':
-        hash_query = [hashtag.replace('#', '%23') for hashtag in hashtags]
-        hash_query_str += '(' + '%20OR%20'.join(hash_query) + ')'
-    
-    url += words_str
-    if(len(hash_query_str) > 0):
-        url += '%20' + hash_query_str
-    url += "%20lang%3Aen&count=20"
-
-    print(url)
-
     api = authenticateApi()
-    results = api.GetSearch(raw_query=url)
+    query = (words + " " + hashtags).strip()
+    results = api.GetSearch(term=query, count=100, lang='en',
+                            result_type='mixed')
+    #print(results[0].created_at)
+    #print(len(results))
+    #for i in range(len(results)):
+    #    print(i + 1, results[i].full_text)
+    #    print()
     return results
 
 
@@ -110,7 +104,4 @@ def authenticateApi():
 
 
 if __name__ == '__main__':
-    temp()
-
-
-
+    main()

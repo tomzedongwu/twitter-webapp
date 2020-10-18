@@ -10,8 +10,7 @@ import dash_html_components as html
 import pandas as pd
 from datetime import date
 from dash.dependencies import Input, Output, State, MATCH, ALL
-from reference import temp
-
+import reference
 
 app = dash.Dash(__name__)
 
@@ -61,7 +60,7 @@ app.layout = html.Div([
 	], className="filters", id="filter"),
 
 	html.Div([
-		html.Div(temp(), 
+		html.Div(reference.main(), 
 		className="row"),
 
 		html.Div([], 

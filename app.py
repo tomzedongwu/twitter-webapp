@@ -29,8 +29,7 @@ app.layout = html.Div([
 				placeholder="Terms",
 				className = "tools",
 				style={'fontSize': '100%'}
-        	),
-			html.Button("Search", )], className="search_tool"
+        	)], className="search_tool"
 		),
 		html.Div(
 			[dcc.Input(
@@ -39,8 +38,7 @@ app.layout = html.Div([
 				placeholder="Hashtags",
 				className = "tools",
 				style={'fontSize': '100%'}
-			),
-			html.Button("Search")], className="search_tool"
+			)], className="search_tool"
 		),
 		html.Div(
 			[dcc.Input(
@@ -49,19 +47,13 @@ app.layout = html.Div([
 				placeholder="Accounts",
 				className = "tools",
 				style={'fontSize': '100%'}
-			),
-			html.Button("Search")], className="search_tool"
-		),
-		html.Div([dcc.DatePickerSingle(
-			id='my-date-picker-single',
-			min_date_allowed=date(2006, 3, 31),
-			date=date(2020, 10, 17)
-    	)])
+			)], className="search_tool"
+		)
 	], className="filters", id="filter"),
 
 	html.Div([
 		html.Div(reference.main(), 
-		className="row"),
+		className="column"),
 	], className="container", id="container")
 ])
 

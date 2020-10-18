@@ -8,7 +8,6 @@ import dash_html_components as html
 def main():
     result = search('Donald Trump', '')
     cards = make_cards(result)
-    #print(len(result))
     return cards
 
 

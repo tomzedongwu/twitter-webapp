@@ -50,7 +50,7 @@ app.layout = html.Div([
 				className = "tools",
 				style={'fontSize': '100%'}
 		)]),
-		html.Button("Search", id="search_button")
+		html.Button("Search", id="search_button", className="search")
 	
 	], className="filters", id="filter"),
 
@@ -59,7 +59,7 @@ app.layout = html.Div([
 		html.Div([], className="column", id="col2"),
 		html.Div([], className="column", id="col3"),
 		html.Div([], className="column", id="col4")
-	], id="container")
+	], id="container", className="container")
 ])
 
 @app.callback(
@@ -74,7 +74,7 @@ app.layout = html.Div([
 )
 def refresh_content(button_clicks, terms, hashtags, accounts):
 	if terms is None and hashtags is None and accounts is None:
-		return html.P("you've found the flag: flag{twitter_webapp}"), html.P(""),html.P(""),html.P("")
+		return html.P(""), html.P(""),html.P(""),html.P("")
 	terms = '' if terms is None else terms
 	hashtags = '' if hashtags is None else hashtags
 	accounts = '' if accounts is None else accounts

@@ -38,6 +38,10 @@ def make_card(status):
     description = if_has_key(user, "description")
     header = make_card_header(profile_image_url, name, description)
     card = make_inner_card(full_text, media, url)
+    account = if_has_key(user, "screen_name")
+    if account is not None:
+        account_url = 'https://twitter.com/' + account
+        header = html.A(header, href=account_url, target="_blank")
     result = html.Div([
         header,
         card
@@ -64,7 +68,7 @@ def make_inner_card(full_text, media, url):
     if media is not None:
         url=media[0]["url"]
         card.children.append(dbc.CardImg(src=media[0]["media_url"], className="card_img"))
-    return html.A(card, href=url, target= "_blank")
+    return html.A(card, href=url, target="_blank")
 
 
 def if_has_key(status, key):

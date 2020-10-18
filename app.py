@@ -10,25 +10,10 @@ import dash_html_components as html
 import pandas as pd
 from datetime import date
 from dash.dependencies import Input, Output, State, MATCH, ALL
+from reference import temp
 
 
 app = dash.Dash(__name__)
-
-
-def make_card(text1, text2, url):
-	div = html.Div([
-		html.Div([
-			html.Div([
-				html.H5(text1),
-				html.Img(src = url)
-			], className="card_front"),
-			html.Div([
-				html.H5(text1),
-				html.P(text2)
-			], className="card_back")
-		], className="flip_card_inner")
-	], className="flip_card")
-	return div
 
 
 app.layout = html.Div([
@@ -76,19 +61,13 @@ app.layout = html.Div([
 	], className="filters", id="filter"),
 
 	html.Div([
-		html.Div([make_card("Some Info", str(i) + "Some Info", 
-		"") \
-				  for i in range(3)], 
+		html.Div(temp(), 
 		className="row"),
 
-		html.Div([make_card("Some Info", str(i) + "Some Info",
-		"") \
-				  for i in range(3)], 
+		html.Div([], 
 		className="row"),
 		
-		html.Div([make_card("Some Info", str(i) + "Some Info",
-		"") \
-				  for i in range(3)], 
+		html.Div([], 
 		className="row")
 	], className="container", id="container")
 ])

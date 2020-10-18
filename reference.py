@@ -4,18 +4,51 @@ import dash_core_components as dcc
 import dash_bootstrap_components as dbc
 import dash_html_components as html
 
-def main():
-    result = search('Donald Trump', '')
+def temp():
+    result = search('Half of this from 2015 came from W2S', '')
     card = make_cards(result)
-    print(len(result))
+    #print(len(result))
+    return card
 
 def make_card(status):
     status=status.AsDict()
-    full_text = if_has_key(status, "full_text")
+
     user = if_has_key(status, "user")
+    full_text = if_has_key(status, "full_text")
     hashtags = if_has_key(status, "hashtags")
-    retweeted_status = if_has_key(status, "retweeted_status") 
-    return None
+    retweeted_status = if_has_key(status, "retweeted_status")
+    media = if_has_key(status, "media")
+
+    profile_image_url = if_has_key(user, "profile_image_url")
+    name = if_has_key(user, "name")
+    description = if_has_key(user, "description")
+    header=html.Div([
+            html.Img(src=profile_image_url),
+            html.Div([
+                html.H2(name),
+                html.P(description, style={"fontStyle":"italic"})
+            ], className="name_des"),
+            
+        ], className = "card_header")
+
+    card = make_inner_card(full_text, media)
+
+    result = html.Div([
+        header,
+        card
+    ], className=card)
+    return result
+
+def make_inner_card(full_text, media, url=None):
+    card = dbc.Card([
+                dbc.CardBody([
+                    html.P(full_text)
+                ])
+                #TODO: link url
+            ])
+    if media is not None:
+        card.children.append(dbc.CardImg(src=media[0]["media_url"]))
+    return card
 
 def if_has_key(status, key):
     if key in status:
@@ -23,6 +56,7 @@ def if_has_key(status, key):
     return None
 
 def make_cards(tweets):
+    print(len(tweets))
     return [make_card(tweet) for tweet in tweets]
 
 def search(words, hashtags):
@@ -41,7 +75,7 @@ def search(words, hashtags):
     url += words_str
     if(len(hash_query_str) > 0):
         url += '%20' + hash_query_str
-    url += "%20lang%3Aen&count=100"
+    url += "%20lang%3Aen&count=20"
 
     print(url)
 
@@ -76,7 +110,7 @@ def authenticateApi():
 
 
 if __name__ == '__main__':
-    main()
+    temp()
 
 
 

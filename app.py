@@ -13,7 +13,7 @@ from dash.dependencies import Input, Output, State, MATCH, ALL
 import reference
 
 app = dash.Dash(__name__)
-app.title = "Twitter-WebApp"
+app.title = "Sentiment Dashboard"
 
 app.layout = html.Div([
 	html.Div([

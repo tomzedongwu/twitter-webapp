@@ -27,7 +27,6 @@ html{
     height: 60px;
     float: right;
 }
-
 .instruct {
     width: 35%;
     height: 35%;
@@ -35,16 +34,10 @@ html{
     border-radius: 20px;
     margin-top: 50px;
 }
-<<<<<<< HEAD
-a{
-=======
-
 .banner > img {
     padding: 20px;
 }
-
 a {
->>>>>>> a61195ac95e8676d0dc3502ea933b6bd836ffc9b
     color: black;
     text-decoration: none;
     font-style: normal;

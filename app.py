@@ -21,8 +21,9 @@ app.layout = html.Div([
     	html.H2('Twitter Sentiment Dashboard', className="header"),
 		html.Img(src="assets/images/icon2.png", className="uw"),
 	], className="banner"),
-	html.Div([html.P('An interactive web app to search for and filter Tweets and gain insight into users\' sentiments')],
+	html.Div([html.P('An interactive web app to search for and filter Tweets and gain insight into users\' sentiments.')],
             className="intro"),
+	html.A("https://github.com/twitter-webapp", href="https://github.com/assafvayner/twitter-webapp", className="github"),
 
 	html.Div([
 		html.Div([
@@ -56,7 +57,7 @@ app.layout = html.Div([
 		html.Div([], className="column", id="col1"),
 		html.Div([], className="column", id="col2"),
 		html.Div([], className="column", id="col3"),
-		html.Div([], className="column", id="col4")
+		html.Div([], className="column", id="col4"),
 	], id="container", className="container"),
 	html.Img(src="assets/images/dog2.jpg", className="instruct")
 ])

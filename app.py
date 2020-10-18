@@ -50,7 +50,10 @@ app.layout = html.Div([
 	
 	], className="filters", id="filter"),
 
-	html.Div(className="container", id="container")
+	html.Div([
+        html.Div(reference.main(), 
+        className="inner_container"),
+    ], className="container", id="container")
 ])
 
 

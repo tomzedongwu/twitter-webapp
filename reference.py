@@ -25,9 +25,9 @@ def make_card(status):
     name = if_has_key(user, "name")
     description = if_has_key(user, "description")
     header=html.Div([
-            html.Img(src=profile_image_url),
+            html.Img(src=profile_image_url, style={"border-radius":"10px", "height":"50px", "width":"50px"}),
             html.Div([
-                html.H2(name),
+                html.H4(name),
                 html.P(description, style={"fontStyle":"italic"})
             ], className="name_des"),
             
@@ -47,9 +47,9 @@ def make_inner_card(full_text, media, url=None):
                     html.P(full_text)
                 ])
                 #TODO: link url
-            ])
+            ], className="inner_card")
     if media is not None:
-        card.children.append(dbc.CardImg(src=media[0]["media_url"]))
+        card.children.append(dbc.CardImg(src=media[0]["media_url"], className="card_img"))
     return card
 
 
@@ -61,7 +61,6 @@ def if_has_key(status, key):
 
 
 def make_cards(tweets):
-    print(len(tweets))
     return [make_card(tweet) for tweet in tweets]
 
 

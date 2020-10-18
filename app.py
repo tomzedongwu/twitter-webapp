@@ -23,7 +23,7 @@ app.layout = html.Div([
 	], className="banner"),
 	html.Div([html.P('An interactive web app to search for and filter Tweets and gain insight into users\' sentiments.')],
               className="intro"),
-    html.Div([html.P('User sentiment is displayed as a number with negative representing negative sentiment, positive representing positive sentiment, and 0 representing neutral.')],
+    html.Div([html.P('User sentiment is displayed as a number with negative representing negative sentiment, positive representing positive sentiment, and 0.0 representing neutral.')],
               className="intro"),
 	html.A("https://github.com/twitter-webapp", href="https://github.com/assafvayner/twitter-webapp", className="github"),
 

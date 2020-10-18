@@ -3,7 +3,7 @@ import dash
 import dash_core_components as dcc
 import dash_bootstrap_components as dbc
 import dash_html_components as html
-
+import re as re;
 
 def get_tweet_cards(terms, hashtags, accounts):
     result = search(terms, hashtags, accounts)
@@ -18,21 +18,38 @@ def make_card(status):
     full_text = if_has_key(status, "full_text")
     hashtags = if_has_key(status, "hashtags")
     retweeted_status = if_has_key(status, "retweeted_status")
+
+    if retweeted_status is None:
+        url = re.search("(https:\/\/t.co)(?!.*\1)(.*)", full_text)
+    else:
+        url = re.search("(https:\/\/t.co)(?!.*\1)(.*)", retweeted_status["full_text"])
+    # url = re.search("(https:\/\/t.co)(?!.*\1)(.*)", ["full_text"])
+    if url is not None:
+        url = url.group(0)
+        url_list = url.split(" ")
+        url = []
+        for link in url_list:
+            if "https://t.co" in link:
+                url.append(link)
+        url = url[-1]
+        print(type(url))
+        print(url)
+        
+
     media = if_has_key(status, "media")
 
     profile_image_url = if_has_key(user, "profile_image_url")
     name = if_has_key(user, "name")
     description = if_has_key(user, "description")
     header=html.Div([
-            html.Img(src=profile_image_url, style={"border-radius":"10px", "height":"50px", "width":"50px"}),
             html.Div([
-                html.H4(name),
-                html.P(description, style={"fontStyle":"italic"})
+                html.Img(src=profile_image_url, style={"borderRadius":"10px", "height":"50px", "width":"50px"}),
+                html.H3(name)
             ], className="name_des"),
-            
+            html.P(description, style={"fontStyle":"italic", "fontSize":"12px"})
         ], className = "card_header")
 
-    card = make_inner_card(full_text, media)
+    card = make_inner_card(full_text, media, url)
 
     result = html.Div([
         header,
@@ -41,7 +58,7 @@ def make_card(status):
     return result
 
 
-def make_inner_card(full_text, media, url=None):
+def make_inner_card(full_text, media, url):
     card = dbc.Card([
                 dbc.CardBody([
                     html.P(full_text)
@@ -49,8 +66,9 @@ def make_inner_card(full_text, media, url=None):
                 #TODO: link url
             ], className="inner_card")
     if media is not None:
+        url=media[0]["url"]
         card.children.append(dbc.CardImg(src=media[0]["media_url"], className="card_img"))
-    return card
+    return html.A(card, href=url, target= "_blank")
 
 
 def if_has_key(status, key):
@@ -80,7 +98,7 @@ def search(terms, hashtags, accounts):
     hash_str = ' '.join(hashtags)
     acct_str = ' '.join(accounts)
     query = (terms + ' ' + hash_str + ' ' + acct_str).strip()
-    print(query)
+    #print(query)
     results = api.GetSearch(term=query, count=100, lang='en',
                             result_type='mixed')
     return results

@@ -1,6 +1,8 @@
 body{
     /*background-color: rgb(29, 29, 29);*/
-    background: url(images/bg1.jpg);
+    /*background: url(images/bg1.jpg);*/
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(51,25,66,1) 100%);
     background-attachment: fixed;
     background-size: cover;
 }
@@ -13,6 +15,7 @@ html{
     color: wheat;
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 .intro{
     width: 100%;
@@ -22,6 +25,7 @@ html{
     align-items: center;
     font-family: "Georgia";
     color: #f1f1f1;
+    font-size: 18px;
 }
 .filters{
     width: 100%;
@@ -31,9 +35,9 @@ html{
     align-items: center;
     margin-top: 10px;
     margin-bottom: 20px;
-    border: 4px solid #676767;
+    border: 4px solid #85754d;
     border-radius: 12px;
-    background-color:#85754d;
+    background: #85754d;
     z-index: 5;
 } 
 .filters>div{
@@ -55,12 +59,24 @@ html{
     border: 2px solid white;
     border-radius: 10px;
     vertical-align: middle;
-    margin-right: 20%;
     margin-left: 20%;
+    font-size: 18px;
+    font-family: "Georgia";
 }
 button{
+    width: 20%;
+    height: 100%;
+    font-family: "Gerogia";
+    font-style: italic;
+    font-size: 20px;
     border: 1px solid white;
     border-radius: 50px;
+    margin-right: 10%;
+}
+button:hover{
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(51,25,66,1) 100%);
+    color: #f1f1f1;
 }
 .sticky {
     position: fixed;
@@ -74,17 +90,15 @@ button{
 .container{
     width: 100%;
     height: 100%;
-    display: flex;
 }
 .column{
     height: 100%;
-    width: 30%;
+    width: 23%;
     float: left;
-    margin-left: 2.5%;
-    background-color: red;
+    margin-left: 1.9%;
 }
 .card{
-    width: 100%;
+    width: 400%;
     background-color: white;
     border-radius: 10px;
     margin-top: 20px;
@@ -92,12 +106,18 @@ button{
 }
 .name_des{
     width: 100%;
-    height: 5%;
+    height: 3%;
+    display: flex;
+    float: left;
 }
 .inner_card{
-    width: 98%;
-    height: 80%;
-    border: 4px solid rgb(29,161,242);
+    width: 97.7%;
+    height: 90%;
+    border: 3.6px solid rgb(29,161,242);
+    color:black;
+}
+.inner_card:hover{
+    border: 7px solid rgb(15, 133, 206);
 }
 .card_img{
     width: 100%;

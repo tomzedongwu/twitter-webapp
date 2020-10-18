@@ -22,16 +22,14 @@ app.layout = html.Div([
 					  className="intro"),
 
 	html.Div([
-		html.Div(
-			[dcc.Input(
+		html.Div([
+			dcc.Input(
 				id="terms",
 				type="text",
 				placeholder="Terms",
 				className = "tools",
 				style={'fontSize': '100%'}
-        	),
-			html.Button("Search")]
-		),
+        )]),
 		html.Div(
 			[dcc.Input(
 				id="hashtags",
@@ -39,9 +37,7 @@ app.layout = html.Div([
 				placeholder="Hashtags",
 				className = "tools",
 				style={'fontSize': '100%'}
-			),
-			html.Button("Search")]
-		),
+		)]),
 		html.Div(
 			[dcc.Input(
 				id="accounts",
@@ -49,27 +45,23 @@ app.layout = html.Div([
 				placeholder="Accounts",
 				className = "tools",
 				style={'fontSize': '100%'}
-			),
-			html.Button("Search")]
-		),
-		html.Div([dcc.DatePickerSingle(
-			id='my-date-picker-single',
-			min_date_allowed=date(2006, 3, 31),
-			date=date(2020, 10, 17)
-    	)])
+		)]),
+		html.Button("Search", id="search_button")
+	
 	], className="filters", id="filter"),
 
-	html.Div([
-		html.Div(reference.main(), 
-		className="row"),
-
-		html.Div([], 
-		className="row"),
-		
-		html.Div([], 
-		className="row")
-	], className="container", id="container")
+	html.Div(className="container", id="container")
 ])
+
+
+@app.callback(
+	[Output('container', children)],
+	[Input('search_button', "value")]
+	[State("terms", "value"),
+	 State("hashtags", "value"),
+	 State("accounts", "value")]	
+)
+
 
 if __name__ == '__main__':
     app.run_server(debug=True)

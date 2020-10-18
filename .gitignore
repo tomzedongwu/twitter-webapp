@@ -3,6 +3,7 @@ keys_and_secrets/
 venv/
 .vscode/
 result.json
+prev_query*
 # experimentation file
 ta.py 
 

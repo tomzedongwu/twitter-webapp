@@ -22,15 +22,14 @@ app.layout = html.Div([
 					  className="intro"),
 
 	html.Div([
-		html.Div(
-			[dcc.Input(
+		html.Div([
+			dcc.Input(
 				id="terms",
 				type="text",
 				placeholder="Terms",
 				className = "tools",
 				style={'fontSize': '100%'}
-        	)], className="search_tool"
-		),
+        )]),
 		html.Div(
 			[dcc.Input(
 				id="hashtags",
@@ -38,8 +37,7 @@ app.layout = html.Div([
 				placeholder="Hashtags",
 				className = "tools",
 				style={'fontSize': '100%'}
-			)], className="search_tool"
-		),
+		)]),
 		html.Div(
 			[dcc.Input(
 				id="accounts",
@@ -47,15 +45,34 @@ app.layout = html.Div([
 				placeholder="Accounts",
 				className = "tools",
 				style={'fontSize': '100%'}
-			)], className="search_tool"
-		)
+		)]),
+		html.Button("Search", id="search_button")
+	
 	], className="filters", id="filter"),
 
-	html.Div([
-		html.Div(reference.main(), 
-		className="column"),
-	], className="container", id="container")
+	html.Div([], className="container", id="container")
 ])
+
+
+@app.callback(
+	[Output('container', 'children')],
+	[Input('search_button', 'n_clicks')],
+	[State("terms", "value"),
+	 State("hashtags", "value"),
+	 State("accounts", "value")]	
+)
+def refresh_content(button_clicks, terms, hashtags, accounts):
+	if terms is None and hashtags is None and accounts is None:
+		return ([html.P("you've found the flag: flag{twitter_webapp}")])
+	terms = '' if terms is None else terms
+	hashtags = '' if hashtags is None else hashtags
+	accounts = '' if accounts is None else accounts
+	cards = reference.get_tweet_cards(terms, hashtags, accounts)
+	res = [html.Div([cards[i + j] if i + j < len(cards) else html.Div() for j in range(0, len(cards), 3)]) for i in range(3)]
+	print(len(cards))
+
+	return [res]
+
 
 if __name__ == '__main__':
     app.run_server(debug=True)

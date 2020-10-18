@@ -5,8 +5,8 @@ import dash_bootstrap_components as dbc
 import dash_html_components as html
 
 
-def main():
-    result = search('Donald Trump', '')
+def get_tweet_cards(terms, hashtags, accounts):
+    result = search(terms, hashtags, accounts)
     cards = make_cards(result)
     return cards
 
@@ -40,6 +40,7 @@ def make_card(status):
     ], className="card")
     return result
 
+
 def make_inner_card(full_text, media, url=None):
     card = dbc.Card([
                 dbc.CardBody([
@@ -52,7 +53,6 @@ def make_inner_card(full_text, media, url=None):
     return card
 
 
-
 def if_has_key(status, key):
     if key in status:
         return status[key]
@@ -63,16 +63,26 @@ def make_cards(tweets):
     return [make_card(tweet) for tweet in tweets]
 
 
-def search(words, hashtags):
+def search(terms, hashtags, accounts):
     api = authenticateApi()
-    query = (words + " " + hashtags).strip()
+    hashtags = hashtags.split(' ')
+    accounts = accounts.split(' ')
+    hashtags = [] if hashtags[0] == '' else hashtags
+    accounts = [] if accounts[0] == '' else accounts
+    for i in range(len(hashtags)):
+        hashtag = hashtags[i]
+        if hashtag[0] != '#':
+            hashtags[i] = '#' + hashtag
+    for i in range(len(accounts)):
+        account = accounts[i]
+        if account[0] != '@':
+            accounts[i] = '@' + account
+    hash_str = ' '.join(hashtags)
+    acct_str = ' '.join(accounts)
+    query = (terms + ' ' + hash_str + ' ' + acct_str).strip()
+    print(query)
     results = api.GetSearch(term=query, count=100, lang='en',
                             result_type='mixed')
-    #print(results[0].created_at)
-    #print(len(results))
-    #for i in range(len(results)):
-    #    print(i + 1, results[i].full_text)
-    #    print()
     return results
 
 

@@ -5,7 +5,9 @@ venv/
 result.json
 prev_query*
 # experimentation file
-ta.py 
+ta.py
+sentiment.py
+tweet.txt
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

@@ -5,10 +5,9 @@ import dash_bootstrap_components as dbc
 import dash_html_components as html
 
 
-def main():
-    result = search('Donald Trump', '')
+def get_tweet_cards(terms, hashtags, accounts):
+    result = search(terms, hashtags, accounts)
     cards = make_cards(result)
-    #print(len(result))
     return cards
 
 
@@ -41,6 +40,7 @@ def make_card(status):
     ], className="card")
     return result
 
+
 def make_inner_card(full_text, media, url=None):
     card = dbc.Card([
                 dbc.CardBody([
@@ -53,7 +53,6 @@ def make_inner_card(full_text, media, url=None):
     return card
 
 
-
 def if_has_key(status, key):
     if key in status:
         return status[key]
@@ -64,16 +63,12 @@ def make_cards(tweets):
     return [make_card(tweet) for tweet in tweets]
 
 
-def search(words, hashtags):
+def search(terms, hashtags, accounts):
     api = authenticateApi()
-    query = (words + " " + hashtags).strip()
+    query = (terms + " " + hashtags).strip()
+    print("calling twitter api")
     results = api.GetSearch(term=query, count=100, lang='en',
                             result_type='mixed')
-    #print(results[0].created_at)
-    #print(len(results))
-    #for i in range(len(results)):
-    #    print(i + 1, results[i].full_text)
-    #    print()
     return results
 
 

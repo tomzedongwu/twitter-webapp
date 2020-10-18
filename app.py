@@ -50,20 +50,28 @@ app.layout = html.Div([
 	
 	], className="filters", id="filter"),
 
-	html.Div([
-        html.Div(reference.main(), 
-        className="inner_container"),
-    ], className="container", id="container")
+	html.Div([], className="container", id="container")
 ])
 
 
 @app.callback(
-	[Output('container', children)],
-	[Input('search_button', "value")]
+	[Output('container', 'children')],
+	[Input('search_button', 'n_clicks')],
 	[State("terms", "value"),
 	 State("hashtags", "value"),
 	 State("accounts", "value")]	
 )
+def refresh_content(button_clicks, terms, hashtags, accounts):
+	if terms is None and hashtags is None and accounts is None:
+		return ([html.P("you've found the flag: flag{twitter_webapp}")])
+	terms = '' if terms is None else terms
+	hashtags = '' if hashtags is None else hashtags
+	accounts = '' if accounts is None else accounts
+	cards = reference.get_tweet_cards(terms, hashtags, accounts)
+	res = [html.Div([cards[i + j] for j in range(0, len(cards) - 1, 3)]) for i in range(3)]
+	print(len(cards))
+
+	return [res]
 
 
 if __name__ == '__main__':

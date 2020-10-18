@@ -9,4 +9,11 @@ window.onscroll = function() {
     }
 }
 
+window.onload = function() {
+    let oBtn = document.querySelector(".search");
+    let oHusky = document.querySelector(".instruct");
+    oBtn.onclick = function() {
+        oHusky.remove();
+    }
+}
 

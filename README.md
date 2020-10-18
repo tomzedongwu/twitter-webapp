@@ -3,7 +3,7 @@
 ## DUBHACKS 2020 Project
 ### Zane Priebe, Assaf Vayner, Tom Wu
 
-A web-app displaying tweets, set in a UI that exposes user to more content syncronously which encourages seeing multiple viewpoints regarding the content available per search query.
+A web-app displaying tweets, set in a UI that exposes user to more content syncronously which encourages seeing multiple viewpoints regarding the content available per search query. This web app also subtly assists the user in reading impartial tweets which have a sentiment score near 0. This means that the phrasing of the tweet does not seek to persuade using exciting language.
 
 ### Dependencies:
 - pandas

@@ -1,4 +1,4 @@
-# twitter-webapp
+# Twitter Sentiment-Dashboard
 
 ## DUBHACKS 2020 Project
 ### Zane Priebe, Assaf Vayner, Zedong(Tom) Wu

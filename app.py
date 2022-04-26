@@ -88,8 +88,6 @@ def refresh_content(button_clicks, terms, hashtags, accounts):
 	cards = reference.get_tweet_cards(terms, hashtags, accounts)
 	num_column = 4
 	res = [html.Div([cards[i + j] if i + j < len(cards) else html.Div() for j in range(0, len(cards), num_column)], className="column") for i in range(num_column)]
-	#temp = [cards[i + j] if i + j < len(cards) else html.Div() for j in range(0, len(cards), num_column)]
-	#print(len(cards))
 	
 	return res[0], res[1], res[2], res[3]
 

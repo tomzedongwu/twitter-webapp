@@ -117,7 +117,6 @@ def search(terms, hashtags, accounts):
     if repeat is not None:
         return repeat
     api = authenticateApi()
-    print("===================\ncalling twitter api\n===================")
     results = api.GetSearch(term=query, count=100, lang='en',
                             result_type='mixed')
     results = [result.AsDict() for result in results]
